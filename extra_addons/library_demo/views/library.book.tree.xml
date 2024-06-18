@@ -1,0 +1,11 @@
+<record id="view_library_book_tree" model="ir.ui.view">
+    <field name="name">library.book.tree</field>
+    <field name="model">library.book</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="pages"/>
+            <field name="genre_ids"/>
+        </tree>
+    </field>
+</record>
