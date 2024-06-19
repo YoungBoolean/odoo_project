@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action -->
+    <record id="action_book_report" model="ir.actions.act_window">
+        <field name="name">Book Registration Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">library.book.report</field>
+        <field name="view_mode">form</field>
+    </record>
+    <!-- Menu Item -->
+    <menuitem id="menu_book_report" name="Book Registration Report"
+              parent="menu_library_root" action="action_book_report"/>
+
+</odoo>

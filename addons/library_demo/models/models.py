@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from datetime import datetime, timedelta
 
 
 class BookModel(models.Model):
@@ -63,3 +62,35 @@ class BookIssueModel(models.Model):
         template_id = self.env.ref('library.book_issue_reminder_email').id
         template = self.env['mail.template'].browse(template_id)
         template.send_mail(issue.id, force_send=True)
+
+
+class BookReportModel(models.TransientModel):
+    _name = 'library.book.report'
+    _description = 'Book Report'
+
+    contact_id = fields.Many2one('res.partner', string='Contact', required=True)
+    registration_history = fields.One2many('library.book.history', 'report_id', string='Registration History')
+
+    @api.onchange('contact_id')
+    def _onchange_contact_id(self):
+        if self.contact_id:
+            records = self.env['library.book.issue'].search([('contact_id', '=', self.contact_id.id)])
+            history_records = []
+            for record in records:
+                for book in record.book_ids:
+                    history_records.append((0, 0, {
+                        'book_id': book.id,
+                        'date': record.start_date
+                    }))
+            self.registration_history = history_records
+        else:
+            self.registration_history = [(5, 0, 0)]  # Clear the history if no contact is selected
+
+
+class BookHistoryModel(models.TransientModel):
+    _name = 'library.book.history'
+    _description = 'Book History'
+
+    report_id = fields.Many2one('library.book.report', string='Report')
+    book_id = fields.Many2one('library.book', string='Book')
+    date = fields.Date('Date of Issue')

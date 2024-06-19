@@ -30,6 +30,8 @@
         'views/library_book_menus.xml',
         'views/library_book_issue_views.xml',
         'views/library_book_issue_menus.xml',
+        'views/library_book_registration_form_views.xml',
+        'views/library_book_registration_form_menus.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
