@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from datetime import datetime, timedelta
 
 
 class BookModel(models.Model):
@@ -41,7 +42,7 @@ class BookIssueModel(models.Model):
     _description = 'Book Issue'
 
     contact_id = fields.Many2one('res.partner', string="Contact", required=True)
-    book_ids = fields.Many2many('library.book', string="Books")
+    book_ids = fields.Many2many('library.book', string="Books", required=True)
     start_date = fields.Date(string="Start Date", required=True)
     end_date = fields.Date(string="End Date", required=True)
     status = fields.Selection([
@@ -50,3 +51,15 @@ class BookIssueModel(models.Model):
         ('returned', 'Returned'),
         ('cancelled', 'Cancelled')
     ], string="Status", default='reserved', required=True)
+
+    @api.model
+    def check_overdue_books(self):
+        today = fields.Date.context_today(self)
+        overdue = self.search([('end_date', '<', today), ('status', '=', 'issued')])
+        for issue in overdue:
+            self.send_reminder_email(issue.contact_id, issue)
+
+    def send_reminder_email(self, contact, issue):
+        template_id = self.env.ref('library.book_issue_reminder_email').id
+        template = self.env['mail.template'].browse(template_id)
+        template.send_mail(issue.id, force_send=True)

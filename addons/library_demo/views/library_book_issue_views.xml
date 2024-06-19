@@ -6,7 +6,6 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="contact_id"/>
-                <field name="book_ids"/>
                 <field name="start_date"/>
                 <field name="end_date"/>
                 <field name="status"/>
@@ -23,6 +22,7 @@
                 <sheet>
                     <group>
                         <field name="contact_id"/>
+                        <field name="book_ids"/>
                         <field name="start_date"/>
                         <field name="end_date"/>
                         <field name="status"/>
@@ -38,6 +38,7 @@
         <field name="model">library.book.issue</field>
         <field name="arch" type="xml">
             <search>
+                <field name="contact_id"/>
                 <field name="book_ids"/>
             </search>
         </field>

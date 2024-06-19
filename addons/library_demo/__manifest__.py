@@ -3,11 +3,10 @@
     'name': "Library",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Library module""",
 
     'description': """
-        Long description of module's purpose
+        Library Management System
     """,
 
     'author': "Paulius Uvarovas",
@@ -20,11 +19,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/email_template.xml',
+        'data/cron_jobs.xml',
         'views/library_book_views.xml',
         'views/library_book_menus.xml',
         'views/library_book_issue_views.xml',
