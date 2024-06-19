@@ -27,6 +27,8 @@
         'security/ir.model.access.csv',
         'views/library_book_views.xml',
         'views/library_book_menus.xml',
+        'views/library_book_issue_views.xml',
+        'views/library_book_issue_menus.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

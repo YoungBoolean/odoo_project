@@ -23,7 +23,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="description"/>
+                        <field name="short_description"/>
                         <field name="pages"/>
                         <field name="genre_ids"/>
                     </group>

@@ -1,0 +1,45 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_book_issue_tree" model="ir.ui.view">
+        <field name="name">library.book.issue.tree</field>
+        <field name="model">library.book.issue</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="contact_id"/>
+                <field name="book_ids"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_book_issue_form" model="ir.ui.view">
+        <field name="name">library.book.issue.form</field>
+        <field name="model">library.book.issue</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="contact_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_library_book_issue_search" model="ir.ui.view">
+        <field name="name">library.book.issue.search</field>
+        <field name="model">library.book.issue</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="book_ids"/>
+            </search>
+        </field>
+    </record>
+</odoo>
